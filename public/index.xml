@@ -77,10 +77,10 @@ problems, and other mathematical problems. Numerical analysis is used in various
     
     <item>
       <title>Hello World</title>
-      <link>http://localhost:1313/posts/hello-world/</link>
+      <link>http://localhost:1313/posts%E7%8E%B0%E5%9C%A8%E5%85%88%E4%B8%8D%E7%94%A8%E8%BF%99%E4%B8%AA/hello-world/</link>
       <pubDate>Wed, 31 Dec 1969 16:33:44 -0800</pubDate>
       
-      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <guid>http://localhost:1313/posts%E7%8E%B0%E5%9C%A8%E5%85%88%E4%B8%8D%E7%94%A8%E8%BF%99%E4%B8%AA/hello-world/</guid>
       
         <description>&lt;p&gt;Hello world! This is my first post on my new Hugo blog.&lt;/p&gt;</description>
       
