@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Muk&#39;s Blog</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on Muk&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Dec 2024 23:42:29 -0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Semiconductor Physics</title>
+      <link>http://localhost:1313/post/semiconductorphysics/</link>
+      <pubDate>Sun, 01 Dec 2024 23:42:29 -0800</pubDate>
+      
+      <guid>http://localhost:1313/post/semiconductorphysics/</guid>
+      
+        <description>&lt;h1 id=&#34;my-document-about-semiconductor-physics&#34;&gt;My Document about Semiconductor Physics&lt;/h1&gt;
+&lt;p&gt;Here’s my PDF document based on what I studied about Semiconductor Physics
+There mainly consists of 3 parts.
+&lt;br&gt;
+Part1: The microscopic composition of semiconductors, which contains theories such as quantum mechanics
+&lt;br&gt;
+part2: The use of n-type and p-type semiconductors, such as pn junctions and related applications
+&lt;br&gt;
+part3: The principles and analysis of BJT and MOSFET include the working principles and applications of each semiconductor device&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Numerical Analysis</title>
+      <link>http://localhost:1313/post/numericalanaylsis/</link>
+      <pubDate>Fri, 17 May 2024 14:20:55 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/numericalanaylsis/</guid>
+      
+        <description>&lt;p&gt;Numerical Analysis is a branch of mathematics that deals with the approximation of solutions to mathematical problems. It involves methods and algorithms for solving equations, systems of linear or nonlinear equations, interpolation, differentiation, integration, optimization
+problems, and other mathematical problems. Numerical analysis is used in various fields such as engineering&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>http://localhost:1313/post/my-first-post/</link>
+      <pubDate>Mon, 01 Jan 2024 23:42:29 -0800</pubDate>
+      
+      <guid>http://localhost:1313/post/my-first-post/</guid>
+      
+        <description>&lt;p&gt;This is my first post1.&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>
