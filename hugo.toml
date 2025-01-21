@@ -1,0 +1,211 @@
+baseURL = "https://jcmk77.github.io"
+languageCode = "en-us"
+title = "Muk's Blog"
+
+# IMPORTANT: Add this line
+theme = "anatole"
+
+# You can add more settings below...
+
+
+
+summarylength = 10
+enableEmoji = true
+enableRobotsTXT = true
+
+# Syntax Highlighting
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+
+# Localized dates requires Hugo >= 0.87.0
+localizedDates = false
+
+################################################################################
+# Markup Config
+################################################################################
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+################################################################################
+# Taxonomies (Categories, Tags, etc.)
+################################################################################
+[taxonomies]
+  category = "categories"
+  series   = "series"
+  tag      = "tags"
+
+################################################################################
+# Related Content
+################################################################################
+[related]
+  includeNewer = true
+  threshold    = 80
+  toLower      = true
+
+[[related.indices]]
+  name   = "keywords"
+  weight = 100
+
+[[related.indices]]
+  name   = "tags"
+  weight = 80
+
+################################################################################
+# Services (Disqus, Google Analytics, etc.)
+################################################################################
+[services.disqus]
+  #shortname = "your-disqus-shortname"
+
+[services.googleAnalytics]
+  #ID = "G-MEASUREMENT_ID"
+
+################################################################################
+# Menus (Merged from menus.en.toml)
+################################################################################
+[menu]
+
+  [[menu.main]]
+    name       = "Home"
+    identifier = "home"
+    weight     = 100
+    url        = "/"
+
+  [[menu.main]]
+    name       = "Posts"
+    identifier = "posts"
+    weight     = 200
+    url        = "/post/"
+
+# [[menu.main]]
+#   name       = "Portfolio"
+#   identifier = "portfolio"
+#   weight     = 300
+#   url        = "/portfolio/"
+
+  [[menu.main]]
+    name       = "About"
+    identifier = "about"
+    weight     = 400
+    url        = "/about/"
+
+# [[menu.main]]
+#   name       = "Accomplishments"
+#   identifier = "accomplishments"
+#   weight     = 500
+
+#  [[menu.main]]
+#    name       = "Awards"
+#    identifier = "awards"
+#    weight     = 510
+#    url        = "/awards/"
+#    parent     = "accomplishments"
+
+#  [[menu.main]]
+#    name       = "Certifications"
+#    identifier = "certifications"
+#    weight     = 520
+#    url        = "/certifications/"
+#    parent     = "accomplishments"
+
+  [[menu.main]]
+    name       = "Contact"
+    identifier = "contact"
+    weight     = 600
+    url        = "/contact/"
+
+  [[menu.footer]]
+    name       = "imprint"
+    identifier = "imprint"
+    weight     = 1
+    url        = "/imprint/"
+
+################################################################################
+# Theme-Specific Parameters (Merged from params.toml)
+################################################################################
+[params]
+  # The Anatole theme often reads these to populate the left sidebar
+  title            = "I'm Mukun"
+  author           = "Mukun"
+  description      = "Here is Mukun's stuff and my engineering thoughts at SFU. Let's shape our world by TECHNOLOGIES" 
+  profilePicture   = "/images/profile.jpg"
+  keywords         = ""
+  favicon          = "/favicons/favicon.ico"
+  customCss        = []
+  customJs         = []
+  mainSections     = ["post"]
+  images           = ["images/site-feature-image.png"]
+  doNotLoadAnimations = false
+
+  # Control how dates are displayed in lists or single posts
+  singleDateFormat = "2/1/2006"
+  indexDateFormat  = "2/1/2006"
+  listDateFormat   = "2/1/2006"
+
+  # Reverse the page title format (Title | Author vs. Author | Title)
+  reversepagetitle = true
+
+  # If you want to hide the sidebar entirely, uncomment:
+  #hidesidebar = true
+
+  # Example contact form integration
+  #contactFormAction   = "https://formspree.io/f/your-form-hash-here"
+  #contactFormReCaptcha = "your-site-key-here"
+
+  # Example Google Fonts array
+  #googleFonts = ["Indie+Flower", "Roboto:ital,wght@0,100;0,400;0,700;1,400"]
+
+  # More advanced settings
+  #readMore          = true
+  #postSectionName   = "blog"
+  #relatedPosts      = true
+  #numberOfRelatedPosts = 3
+  #disableTitleCapitalization = true
+
+  ##############################################################################
+  # Analytics Integrations
+  ##############################################################################
+  [params.simpleAnalytics]
+    # enable = true
+    # customurl = "https://analytics.example.com"
+
+  [params.plausibleAnalytics]
+    # domain   = "example.com"
+    # serverURL = "https://analytics.example.com"
+
+  [params.umami]
+    # serverURL = "example.com"
+    # id = "94db1cb1-74f4-4a40-ad6c-962362670409"
+    # trackerScriptName = "mycustomscriptname.js"
+
+  ##############################################################################
+  # Math Support (KaTeX / MathJax)
+  ##############################################################################
+  [params.math]
+    enable = false
+    use    = "katex"
+
+  ##############################################################################
+  # Social Icons
+  ##############################################################################
+  [[params.socialIcons]]
+    icon  = "fa-brands fa-linkedin"
+    title = "Linkedin"
+#    url   = "https://de.linkedin.com/"
+
+  [[params.socialIcons]]
+    icon  = "fa-brands fa-github"
+    title = "GitHub"
+#    url   = "https://github.com/lxndrblz/anatole/"
+
+#  [[params.socialIcons]]
+#    icon  = "fa-brands fa-instagram"
+#    title = "instagram"
+#    url   = "https://www.instagram.com/"
+
+  [[params.socialIcons]]
+    icon  = "fa-solid fa-envelope"
+    title = "e-mail"
+    url   = "jcmk1226@gmail.com"
