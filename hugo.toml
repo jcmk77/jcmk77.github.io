@@ -193,7 +193,7 @@ localizedDates = false
   [[params.socialIcons]]
     icon  = "fa-brands fa-linkedin"
     title = "Linkedin"
-#    url   = "https://www.linkedin.com/in/mk-chen-b79735347/"
+    url   = "www.linkedin.com/in/mk-chen-b79735347"
 
   [[params.socialIcons]]
     icon  = "fa-brands fa-github"
