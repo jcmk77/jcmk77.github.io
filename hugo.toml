@@ -129,7 +129,7 @@ localizedDates = false
   # The Anatole theme often reads these to populate the left sidebar
   title            = "I'm Mukun"
   author           = "Mukun"
-  description      = "Here is Mukun's stuff and engineering thoughts at SFU. Let's shape our world by TECHNOLOGIES" 
+  description      = "Here is Mukun's engineering stuff and thoughts at SFU. Let's shape our world by TECHNOLOGIES. Click Posts to learn more" 
   profilePicture   = "/images/profile.jpg"
   keywords         = ""
   favicon          = "/favicons/favicon.ico"
@@ -196,10 +196,10 @@ localizedDates = false
     url   = "www.linkedin.com/in/mk-chen-b79735347"
 
   [[params.socialIcons]]
-    icon  = "fa-brands fa-github"
-    title = "GitHub"
+#    icon  = "fa-brands fa-github"
+#    title = "GitHub"
 #    url   = "https://github.com/lxndrblz/anatole/"
-    url   = "https://github.sfu.ca/mca307"
+#    url   = "https://github.sfu.ca/mca307"
 
 #  [[params.socialIcons]]
 #    icon  = "fa-brands fa-instagram"
