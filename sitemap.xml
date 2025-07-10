@@ -2,46 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://jcmk77.github.io/contact/</loc>
+    <loc>http://localhost:1313/contact/</loc>
     <lastmod>2024-12-27T23:43:24-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2024-12-27T23:43:24-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2024-12-22T23:47:29-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/post/</loc>
+    <loc>http://localhost:1313/post/</loc>
     <lastmod>2024-12-01T23:42:29-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/post/semiconductorphysics/</loc>
+    <loc>http://localhost:1313/post/semiconductorphysics/</loc>
     <lastmod>2024-12-01T23:42:29-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/post/numericalanaylsis/</loc>
+    <loc>http://localhost:1313/post/numericalanaylsis/</loc>
     <lastmod>2024-05-17T14:20:55+00:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/post/ai/</loc>
+    <loc>http://localhost:1313/post/ai/</loc>
     <lastmod>2024-04-01T23:42:29-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/post/real-time/</loc>
+    <loc>http://localhost:1313/post/real-time/</loc>
     <lastmod>2024-01-01T23:42:29-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/post/microelectronics/</loc>
+    <loc>http://localhost:1313/post/microelectronics/</loc>
     <lastmod>2023-12-01T23:42:29-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/post/my-first-post/</loc>
+    <loc>http://localhost:1313/post/my-first-post/</loc>
     <lastmod>2022-01-01T23:42:29-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/posts/hello-world/</loc>
+    <loc>http://localhost:1313/posts/hello-world/</loc>
     <lastmod>1969-12-31T16:33:44-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>1969-12-31T16:33:44-08:00</lastmod>
   </url><url>
-    <loc>https://jcmk77.github.io/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
   </url><url>
-    <loc>https://jcmk77.github.io/series/</loc>
+    <loc>http://localhost:1313/series/</loc>
   </url><url>
-    <loc>https://jcmk77.github.io/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>

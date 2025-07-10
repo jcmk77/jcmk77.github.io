@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Muk&#39;s Blog</title>
-    <link>https://jcmk77.github.io/post/</link>
+    <link>http://localhost:1313/post/</link>
     <description>Recent content in Posts on Muk&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Dec 2024 23:42:29 -0800</lastBuildDate><atom:link href="https://jcmk77.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Dec 2024 23:42:29 -0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Semiconductor Physics</title>
-      <link>https://jcmk77.github.io/post/semiconductorphysics/</link>
+      <link>http://localhost:1313/post/semiconductorphysics/</link>
       <pubDate>Sun, 01 Dec 2024 23:42:29 -0800</pubDate>
       
-      <guid>https://jcmk77.github.io/post/semiconductorphysics/</guid>
+      <guid>http://localhost:1313/post/semiconductorphysics/</guid>
       
         <description>&lt;!-- # My Document about Semiconductor Physics --&gt;
 &lt;p&gt;&lt;strong&gt;My Documents about Semiconductor Physics&lt;/strong&gt;&lt;/p&gt;</description>
@@ -21,10 +21,10 @@
     
     <item>
       <title>Numerical Analysis</title>
-      <link>https://jcmk77.github.io/post/numericalanaylsis/</link>
+      <link>http://localhost:1313/post/numericalanaylsis/</link>
       <pubDate>Fri, 17 May 2024 14:20:55 +0000</pubDate>
       
-      <guid>https://jcmk77.github.io/post/numericalanaylsis/</guid>
+      <guid>http://localhost:1313/post/numericalanaylsis/</guid>
       
         <description>&lt;p&gt;Numerical Analysis is a branch of mathematics that deals with the approximation of solutions to mathematical problems. It involves methods and algorithms for solving equations, systems of linear or nonlinear equations, interpolation, differentiation, integration, optimization
 problems, and other mathematical problems. Numerical analysis is used in various fields such as engineering&lt;/p&gt;</description>
@@ -33,10 +33,10 @@ problems, and other mathematical problems. Numerical analysis is used in various
     
     <item>
       <title>Artificial Intelligence</title>
-      <link>https://jcmk77.github.io/post/ai/</link>
+      <link>http://localhost:1313/post/ai/</link>
       <pubDate>Mon, 01 Apr 2024 23:42:29 -0800</pubDate>
       
-      <guid>https://jcmk77.github.io/post/ai/</guid>
+      <guid>http://localhost:1313/post/ai/</guid>
       
         <description>&lt;p&gt;&lt;strong&gt;Intelligence works!!!&lt;/strong&gt;
 &lt;br&gt;
@@ -47,10 +47,10 @@ I’m so excited to start studying AI! I’ve always been fascinated by how mach
     
     <item>
       <title>Real-Time Programming by C&#43;&#43;</title>
-      <link>https://jcmk77.github.io/post/real-time/</link>
+      <link>http://localhost:1313/post/real-time/</link>
       <pubDate>Mon, 01 Jan 2024 23:42:29 -0800</pubDate>
       
-      <guid>https://jcmk77.github.io/post/real-time/</guid>
+      <guid>http://localhost:1313/post/real-time/</guid>
       
         <description>&lt;p&gt;** Implementation: YMODEM **
 Through the implementation of YMODEM, we got hands-on experience with the challenges and solutions required for real-time communication systems. These multiple projects involved creating a protocol that allows for the transfer of files over serial communication, ensuring data integrity and reliability in real-time environments.
@@ -61,10 +61,10 @@ Through the implementation of YMODEM, we got hands-on experience with the challe
     
     <item>
       <title>Mircoelectronics</title>
-      <link>https://jcmk77.github.io/post/microelectronics/</link>
+      <link>http://localhost:1313/post/microelectronics/</link>
       <pubDate>Fri, 01 Dec 2023 23:42:29 -0800</pubDate>
       
-      <guid>https://jcmk77.github.io/post/microelectronics/</guid>
+      <guid>http://localhost:1313/post/microelectronics/</guid>
       
         <description>&lt;!-- # My Document about Semiconductor Physics --&gt;
 &lt;p&gt;&lt;strong&gt;My Documents about Mircoelectronics&lt;/strong&gt;&lt;/p&gt;</description>
@@ -72,11 +72,25 @@ Through the implementation of YMODEM, we got hands-on experience with the challe
     </item>
     
     <item>
+      <title>Data Structure and Programming</title>
+      <link>http://localhost:1313/post/datastructure/</link>
+      <pubDate>Sat, 01 Apr 2023 23:42:29 -0800</pubDate>
+      
+      <guid>http://localhost:1313/post/datastructure/</guid>
+      
+        <description>&lt;p&gt;&lt;strong&gt;Good Java&lt;/strong&gt;
+&lt;br&gt;
+Data Structure is a fundamental but vital for any software engineer. here are some important topics that I have learnt.
+&lt;br&gt;&lt;br&gt;&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
       <title>My First Post</title>
-      <link>https://jcmk77.github.io/post/my-first-post/</link>
+      <link>http://localhost:1313/post/my-first-post/</link>
       <pubDate>Sat, 01 Jan 2022 23:42:29 -0800</pubDate>
       
-      <guid>https://jcmk77.github.io/post/my-first-post/</guid>
+      <guid>http://localhost:1313/post/my-first-post/</guid>
       
         <description>&lt;p&gt;This is my first post1.
 I&amp;rsquo;m going to share MANY thigns here.
