@@ -1,15 +1,8 @@
 baseURL = "https://jcmk77.github.io/"
 languageCode = "en-us"
 title = "Muk's Blog"
-
-# IMPORTANT: Add this line
 theme = "anatole"
-
-# You can add more settings below...
-
-
-
-summarylength = 10
+summaryLength = 10
 enableEmoji = true
 enableRobotsTXT = true
 
@@ -20,6 +13,10 @@ pygmentsCodefencesGuessSyntax = true
 
 # Localized dates requires Hugo >= 0.87.0
 localizedDates = false
+
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"
 
 ################################################################################
 # Markup Config
@@ -116,12 +113,6 @@ localizedDates = false
     weight     = 600
     url        = "/contact/"
 
-  [[menu.footer]]
-    name       = "imprint"
-    identifier = "imprint"
-    weight     = 1
-    url        = "/imprint/"
-
 ################################################################################
 # Theme-Specific Parameters (Merged from params.toml)
 ################################################################################
@@ -130,9 +121,9 @@ localizedDates = false
   title            = "I'm Mukun"
   author           = "Mukun"
   description      = "Here is Mukun's engineering stuff and thoughts at SFU. Let's shape our world by TECHNOLOGIES. Click Posts to learn more" 
-  profilePicture   = "/images/profile.jpg"
+  profilePicture   = "images/profile.jpg"
   keywords         = ""
-  favicon          = "/favicons/favicon.ico"
+  favicon          = "favicons/"
   customCss        = []
   customJs         = []
   mainSections     = ["post"]
@@ -193,20 +184,4 @@ localizedDates = false
   [[params.socialIcons]]
     icon  = "fa-brands fa-linkedin"
     title = "Linkedin"
-    url   = "www.linkedin.com/in/mk-chen-b79735347"
-
-  [[params.socialIcons]]
-#    icon  = "fa-brands fa-github"
-#    title = "GitHub"
-#    url   = "https://github.com/lxndrblz/anatole/"
-#    url   = "https://github.sfu.ca/mca307"
-
-#  [[params.socialIcons]]
-#    icon  = "fa-brands fa-instagram"
-#    title = "instagram"
-#    url   = "https://www.instagram.com/"
-
-  [[params.socialIcons]]
-#    icon  = "fa-solid fa-envelope"
-#    title = "e-mail"
-#    url   = "myblog/content/contact.md"
+    url   = "https://www.linkedin.com/in/mk-chen-b79735347"
