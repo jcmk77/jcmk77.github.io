@@ -130,6 +130,10 @@ localizedDates = false
   images           = ["images/site-feature-image.png"]
   doNotLoadAnimations = false
 
+  [params.rssAuthor]
+    name = "Mukun"
+    email = "mca307@sfu.ca"
+
   # Control how dates are displayed in lists or single posts
   singleDateFormat = "2/1/2006"
   indexDateFormat  = "2/1/2006"
