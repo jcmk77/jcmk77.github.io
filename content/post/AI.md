@@ -10,7 +10,7 @@ draft: false
 
 
 
-**Intelligence works!!!**
+**AI AI AI**
 <br>
 I’m so excited to start studying AI! I’ve always been fascinated by how machines can learn and make decisions, and I finally got the chance to dive into this field. I can’t wait to explore topics like machine learning, neural networks, and etc. First time when I used Chatgpt (I know it belongs to Natural Language Processing and model, not covered in this course), I was so obessed with AI and machine learning. It is magical to see how a machine can understand and respond to human tasks, or even make decisions based on data. I have more motivation to learn more about AI compared to other courses, like physics or circuit (they are cool and useful though).
 <br><br>
