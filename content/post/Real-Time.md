@@ -1,5 +1,5 @@
 ---
-title: "Real-Time Programming by C++"
+title: "multithread & Real-Time System"
 date: 2024-01-01T23:42:29-08:00
 Description: ""
 Tags: []

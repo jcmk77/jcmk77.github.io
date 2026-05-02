@@ -1,13 +1,14 @@
 ---
-title: "The Hard Part Wasn't the Math, It Was the Memory"
+title: "Hardware Acceleration: Likelihood Kernel"
 date: 2026-05-01T19:10:00-06:00
-Description: "A retrospective on the ENSC 453 likelihood-kernel project, and how an irregular particle-filter workload had to be reshaped before FPGA and GPU acceleration really made sense."
+Description: "A retrospective on the likelihood-kernel project, and how an irregular particle-filter workload had to be reshaped before FPGA and GPU acceleration really made sense."
 Tags: ["ENSC453", "FPGA", "GPU", "Vitis HLS", "CUDA", "OpenMP", "Performance"]
 Categories: ["Hardware Acceleration"]
 DisableComments: false
 draft: false
 ---
 
+## The Hard Part Wasn't the Math, It Was the Memory 
 TThis project focused on hardware acceleration for a likelihood kernel, a type of computation commonly used in AI, robotics, and automation workloads. What stayed with me was not simply that the project accelerated a kernel, but that it documented a more important realization: **the likelihood math was never the real problem. The memory pattern was.**
 
 On paper, the kernel looks manageable. For each particle, drop a radius-5 circular mask over the image, inspect the **69** pixels under that mask, and compute a likelihood value. The project fixes the image at **4000 x 4000**, pushes the particle count up to **3 million**, and compares three implementations: a CPU baseline, a GPU version, and an FPGA design. But the hard part is that particles are scattered randomly, so the pixel accesses are scattered too. That means the kernel is not naturally a clean streaming workload. It is an irregular gather problem pretending to be a compute problem.
