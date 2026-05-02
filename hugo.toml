@@ -118,9 +118,9 @@ localizedDates = false
 ################################################################################
 [params]
   # The Anatole theme often reads these to populate the left sidebar
-  title            = "I'm Mukun"
+  title            = "I'm Jason(Mukun)"
   author           = "Mukun"
-  description      = "Here is Mukun's engineering stuff and thoughts at SFU. Let's shape our world by TECHNOLOGIES. Click Posts to learn more" 
+  description      = "Here is Jason's engineering stuff and thoughts at SFU. Let's shape our world by TECHNOLOGIES. Click Posts to learn more" 
   profilePicture   = "images/profile.jpg"
   keywords         = ""
   favicon          = "favicons/"

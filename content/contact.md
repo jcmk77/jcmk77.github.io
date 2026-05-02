@@ -5,5 +5,5 @@ draft = false
 +++
 
 
-Message: 778-238-3427
+Phone: 778-238-3427
 Email: mca307@sfu.ca 

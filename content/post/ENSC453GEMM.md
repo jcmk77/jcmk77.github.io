@@ -1,118 +1,136 @@
 ---
-title: "High-Performance Computing in CPU FPGA GPU"
-date: 2026-05-01T11:35:00-06:00
-Description: "A retrospective on the High-Performance Computing labs, from OpenMP GEMM to Vitis HLS on FPGA and CUDA image blur."
-Tags: ["ENSC453", "OpenMP", "AVX2", "FPGA", "Vitis HLS", "CUDA", "Performance"]
+title: "Hardware Acceleration: GEMM Performance Engineering"
+date: 2026-05-02T10:15:00-06:00
+Description: "A retrospective on five ENSC 453 labs, from OpenMP GEMM on CPU to HLS on FPGA and CUDA on GPU, and how each one changed how I think about performance."
+Tags: ["ENSC453", "GEMM", "OpenMP", "AVX2", "FPGA", "HLS", "CUDA", "Performance Engineering"]
 Categories: ["Hardware Acceleration"]
 DisableComments: false
 draft: false
 ---
 
-## Hardware Acceleration is ready
-This is a brief learning log documenting my study of hardware acceleration. The topic appealed to me because it showed strong potential for improving computational performance and helped me better understand the importance of AI infrastructure. The project consists of fiver labs, primarily focused on matrix multiplication and optimization.
+When I started these HPC labs, I thought performance work would mostly mean "adding more parallelism." By the end, I had a very different view. What the course really taught me was that performance comes from controlling **data movement, synchronization, and reuse** far more carefully than I first expected.
 
-What ties all five labs together is one lesson: **raw parallelism is never enough by itself**. Every time the performance improved in a major way, it was because the design got better at moving data, reusing data, or avoiding unnecessary synchronization.
+The sequence was also well designed for that lesson. It started with OpenMP on CPU, moved into cache tiling and vectorization, then forced me to think like a hardware designer on FPGA, and finally ended with CUDA optimization on GPU. Even though the implementation platforms kept changing, the core question stayed the same:
 
-## Lab 1: Parallelism Helps, But Synchronization Still Matters
+**Where is my data, and how often am I forcing the machine to move it?**
 
-Lab 1 is the simplest report in the folder, but it already contains the core theme of the entire sequence. The baseline GEMM is parallelized with OpenMP in two different ways.
+Looking back, that question explains almost every good result I got.
 
-The first strategy is straightforward: parallelize the outer `i` loop with a single `#pragma omp parallel for`. That version scales reasonably well. The report shows runtime dropping from about **17.26 s** on one thread to **2.52 s** on 20 threads, for a speedup of about **6.86x**. It is not ideal scaling, but it is stable and easy to explain. Each thread gets full rows of `C`, so the work is coarse-grained and the synchronization overhead is low.
+## Lab 1 Made Me Respect Synchronization Costs
 
-The second strategy parallelizes both `j` loops inside a surrounding OpenMP region. In theory, that sounds more aggressive. In practice, it is worse. The report shows that by 20 threads it only reaches about **5.77x** speedup, and the behavior becomes less stable. The explanation is good and very practical: every `omp for` ends with an implicit barrier, and with `NI = 2048`, the program pays that barrier cost again and again. Once thread counts climb and hybrid-core scheduling starts to matter, the slowest thread holds everybody back.
+The first lab looked simple on the surface: parallelize GEMM with OpenMP and study the scaling. What made it useful was that it showed me very early that two implementations can do the same arithmetic and still behave very differently because of synchronization structure.
 
-That is a good first lab lesson because it cuts against the naive idea that “more parallel directives means more performance.” It does not. Sometimes fewer synchronization points matter more.
+For the first version, I parallelized the outer `i` loop directly with `#pragma omp parallel for`. That gave each thread a coarse chunk of work and kept the synchronization overhead low. On one thread, the kernel took about **17.26 s**. On 20 threads, it dropped to about **2.52 s**, which gave me a speedup of roughly **6.86x**.
 
-## Lab 2: The Big CPU Speedups Came From Locality, Not Threads
+The second version was more complicated. I used a surrounding `#pragma omp parallel` region and then placed `#pragma omp for` directives inside the outer loop. On paper, it still looked parallel. In practice, it inserted repeated implicit barriers into a kernel with `NI = 2048`, so the threads kept stopping to synchronize thousands of times. That version only reached about **5.77x** speedup on 20 threads.
 
-Lab 2 is where the project becomes much more serious. The base runtime for the larger GEMM is listed as **506.74 s**, and the report does a good job identifying the real problem: the original loop order accesses the `B` matrix with a **16 KiB stride**, which is terrible for cache-line use.
+That gap changed how I thought about OpenMP. Before this lab, I would have described the two versions as minor variations. After measuring them, I stopped treating synchronization as a small implementation detail. It was part of the algorithm.
 
-The report walks through three tiling strategies:
+My main takeaway from Lab 1 was that coarse-grained work distribution usually wins if it avoids repeated coordination. The threads were not struggling because GEMM was hard to parallelize. They were struggling because I had given them too many chances to wait for each other.
 
-- `TM1`: 1-D tiling
-- `TM2`: 2-D tiling with loop permutation
-- `TM3`: a more refined tiled structure with better reuse of `A`, `B`, and `C`
+## Lab 2 Taught Me That Locality Comes Before Heroics
 
-The important result is not just that tiling helps. It is that **different tile shapes change which memory bottleneck dominates**. By the time they get to `TM3`, the team is already thinking in the right way: not just “block it,” but “which loop should get the large tile, which loops should stay small, and how much reuse can I get before eviction risk takes over?”
+Lab 2 was the point where performance optimization started to feel less like API usage and more like systems work.
 
-Their best single-thread tile strategy reaches about **26x** speedup. Then explicit SIMD via `#pragma omp simd` pushes that to about **68x**, bringing runtime down to **7.45 s**. After adding OpenMP on top of the tiled SIMD kernel, runtime falls to **0.84 s**, roughly **603x** faster than the baseline. The final step is an AVX2 micro-kernel using intrinsics like `_mm256_loadu_ps`, `_mm256_mul_ps`, and `_mm256_add_ps`, which brings runtime down further to about **0.55 s**, or roughly **917x** speedup.
+The starting point was a serial GEMM that took about **506.74 s**. The code was doing the right arithmetic, but the memory behavior was bad. The biggest issue was the access pattern for matrix `B`: the loop order was forcing a stride of **4096 floats**, which is **16 KiB** between adjacent accesses. That is about the fastest possible way to remind myself that caches are not magic.
 
-That jump is enormous, but it is not magic. The report makes it clear that the win came in layers:
+I approached the optimization in stages.
 
-- fix locality first
-- vectorize the contiguous dimension
-- parallelize after the working set makes sense
-- only then drop into intrinsics for the last major gain
+First, I used 1-D tiling to improve reuse along the `j` dimension. That helped, but it was still only part of the story. Then I moved to 2-D tiling and loop permutation so that the kernel could reuse `A`, `B`, and `C` more intelligently. The most useful version for me was the third tiled implementation, where I stopped insisting on one uniform tile size and instead tuned each loop dimension separately. The best setting I found was:
 
-That ordering matters. The AVX2 code works because the data layout and loop order were already prepared for it.
+- `Ti = 32`
+- `Tj = 1024`
+- `Tk = 32`
 
-## Lab 3: The Same Ideas Reappear On FPGA, Just More Explicitly
+That detail mattered to me because it was one of the first times I felt I was optimizing for the machine I actually had rather than for symmetry on paper. The best answer was not the prettiest answer.
 
-Lab 3 moves into Vitis HLS on an **Alveo U50 FPGA**, and this is where the course shifts from “optimize code” to “design a hardware-friendly data path.” The report frames the problem clearly: the matrices are **4096 x 4096**, so the data lives off-chip and must be pulled into manageable tiles. That immediately leads to a load/compute/store structure with on-chip buffers.
+Once the memory behavior was under control, vectorization started to pay off. Adding `#pragma omp simd` to the beta-scaling and inner update loops brought the runtime down to about **7.45 s**, which was already a **68x** speedup over the original baseline. Then I combined the tiled structure with OpenMP across the outer loop and got the runtime down to about **0.84 s**, or roughly **603x** speedup.
 
-This part of the folder is useful because it shows how much more explicit optimization becomes in HLS. On CPU, we talk about cache locality. On FPGA, we declare the buffers ourselves. On CPU, the compiler decides a lot about memory behavior. On FPGA, we decide how tiles get loaded, when scaling by alpha and beta happens, what gets pipelined, and which arrays get partitioned.
+The final step was replacing the compiler-directed SIMD path with explicit **AVX2 intrinsics**. I used 256-bit vectors, broadcasted a single `A` value across a register, loaded chunks of `B`, accumulated into vectorized `C`, and unrolled across `k`. That pushed the runtime down again to about **0.55 s**, which corresponded to roughly **917x** speedup over where I started.
 
-The report’s progression is sharp:
+What I liked about Lab 2 was that it gave me a disciplined order of operations:
 
-- baseline estimated absolute latency: about **1960 s**
-- load/compute/store tiled buffering: about **167.9 s**
-- pipelined load/store: roughly the same latency, but a better structure for scaling
-- optimized compute with a **16 x 32** parallel micro-kernel: about **0.91 s**
+1. fix locality
+2. exploit SIMD
+3. add threading
+4. then consider hand-tuned intrinsics
 
-That last step is the real leap. The design uses unrolling, pipelining with `II=1`, array partitioning, and DSP-bound floating-point operations to create a hardware pipeline that updates a large output micro-tile in parallel while still staying inside the lab’s resource limits. The report lists the final resource use at about **48% BRAM**, **43% DSP**, **24% FF**, and **43% LUT**, which is a good reminder that FPGA optimization is always a negotiation between latency and silicon budget.
+That order has stayed with me. If I had started with AVX2 before fixing the access pattern, I would have been vectorizing a bad idea faster.
 
-Lab 3 is probably the clearest place where the course stops feeling like software optimization and starts feeling like architecture.
+## Lab 3 Forced Me To Think Like A Hardware Designer
 
-## Lab 4: Performance Is Not Enough Until The Whole FPGA System Works
+By Lab 3, the problem stopped being "how do I help the CPU cache?" and became "how do I build the memory hierarchy myself?"
 
-Lab 4 extends the Lab 3 kernel into a fuller acceleration pipeline. This is where the folder becomes especially interesting because it is no longer just about C-synthesis results. It is about **system integration**.
+On FPGA, a `4096 x 4096` matrix is far too large to treat casually. Each matrix is about **64 MB**, so I could not just assume the data would sit near the compute units. I had to explicitly tile the problem, move tiles into local buffers, compute on them, and write them back out. That led me to a load-compute-store design with on-chip `buffer_A`, `buffer_B`, and `buffer_C` arrays.
 
-The first big idea is **memory coalescing through 512-bit AXI bus widening**. Instead of moving one 32-bit float at a time, the design packs **16 floats** into `ap_uint<512>` transfers and manually unpacks them into on-chip buffers. The report notes that this alone gives about **1.69x** additional speedup relative to Lab 3, with estimated absolute latency improving to about **0.537 s**.
+That first transformation already changed the scale of the result. The baseline HLS estimate was on the order of **1960 s** absolute latency. After reorganizing the kernel around tiled buffering, the estimate dropped to about **167.9 s**.
 
-The second big idea is **manual ping-pong buffering**. Two `A` buffers and two `B` buffers are alternated so that one pair can be loaded while the other pair is being consumed by `compute_gemm()`. The report compares the overlapped loop latency against the sum of the component latencies and shows that the overlap is real, not just something assumed from the code structure. That optimization yields another meaningful gain, landing around **0.559 s** on its own relative path.
+The real jump came when I optimized the compute engine instead of only the memory staging. I built a parallel micro-kernel around **16-way row parallelism** and **32-way column unrolling**, partitioned the arrays so the hardware could actually feed that parallelism, and bound the floating-point operations onto DSP resources with explicit latencies. At that point, the kernel stopped looking like a C loop nest and started looking like a hardware schedule.
 
-Combined, the two ideas push the estimated latency to about **0.507 s**. That is only part of the story, though. Lab 4 also covers the full hardware acceleration development cycle:
+That version brought the estimated absolute latency down to about **0.91 s** while still staying within the resource budget:
 
-- `sw-emu`: functional CPU-side emulation
-- `hw-emu`: RTL-level hardware emulation
+- **BRAM:** 48%
+- **DSP:** 43%
+- **FF:** 24%
+- **LUT:** 43%
+
+This lab was where I stopped thinking of "optimization" as purely shrinking runtime. On FPGA, optimization is a balance between latency, throughput, and resource pressure. A fast design that cannot fit is not a good design. I had to care about whether I was spending BRAM or DSPs responsibly, not just whether a loop could be unrolled further.
+
+## Lab 4 Taught Me That A Fast Kernel Is Not Enough
+
+Lab 4 extended the FPGA work in the direction that mattered most: making the design behave better as a system, not just as a compute core.
+
+The first major improvement was widening the memory interface to **512 bits** over AXI4. I originally tried using helper infrastructure for wide buses, but the limitations were not worth fighting. The better route was to pack and unpack the data manually with `ap_uint<512>` and move **16 floats per memory chunk**. That reduced the number of memory transactions and improved effective bandwidth much more directly.
+
+That alone brought the latency estimate down substantially relative to the Lab 3 design. Then I added **ping-pong buffering** so one tile could be loading while another was computing. What made that step satisfying was that I could actually verify the overlap instead of just claiming it. The measured per-tile latency lined up closely with the compute stage rather than the serial sum of load-plus-compute, which showed that the overlap was real.
+
+With the combined optimizations, the design reached an estimated latency of about **0.507 s** to **0.694 s** depending on which estimate path I looked at, for roughly **1.8x** speedup over the Lab 3 reference design. Resource use stayed controlled, though URAM and BRAM usage became much more meaningful as the buffering strategy got more ambitious.
+
+What mattered even more to me was that this lab forced me to go beyond HLS estimates and work through the deployment pipeline:
+
+- software emulation
+- hardware emulation
 - real hardware execution on the **Alveo U50**
+- OpenCL host orchestration
+- correctness checking against a CPU reference
 
-The actual hardware run reported in the document is about **1152.23 ms**, with post-place-and-route estimates around **0.517 s**. That gap is useful. It reminds me that end-to-end performance includes more than the kernel’s internal schedule. Tool flow, memory migration, runtime overhead, and system-level realities all matter.
+On real hardware, the full run reported about **1152.23 ms** execution time. That number was not identical to the synthesis estimates, and I thought that was useful rather than disappointing. It reminded me that the hardware development cycle is not just about the kernel body. Host setup, memory movement, tool behavior, and post-route timing all matter once the design leaves the notebook.
 
-Lab 4 is where the project stops being an HLS exercise and starts looking like actual accelerator deployment work.
+Lab 4 made the project feel more honest. I was no longer just optimizing a function. I was building an accelerator pipeline that had to survive contact with an actual board.
 
-## Lab 5: Different Algorithm, Same Core Lessons
+## Lab 5 Closed The Loop On Data Reuse
 
-Lab 5 looks like a detour at first because it leaves GEMM and switches to a **CUDA image blur** kernel on a **3840 x 2160** grayscale image with blur radius **21**. But conceptually it belongs in the same sequence.
+The last lab changed applications, but not really the lesson.
 
-The baseline runtime is about **0.364 s** including data transfer. The first optimization is not just “use shared memory.” The better idea is to reorganize the blur computation into phases:
+Instead of GEMM, I optimized a CUDA image blur on a **3840 x 2160** image with blur radius **21**. The baseline implementation, including transfers, took about **0.364 s**. The goal was to improve kernel performance first and then improve host-device transfer behavior.
 
-1. load a halo-padded tile into shared memory
-2. compute partial column sums
-3. reuse those sums to form final pixel values
+The biggest step was redesigning the computation around shared memory. I used a **16 x 16** thread block to cooperatively load data for a **32 x 32** output tile with halo coverage, which gave a shared tile of **74 x 74**. But the part I found most interesting was not just the shared-memory cache itself. The bigger gain came from reusing **partial column sums** so the blur did not recompute the same work repeatedly.
 
-That arithmetic restructuring matters as much as the memory placement. The report explicitly says that the big speedup was not only from moving data from global to shared memory, but from **reusing partial sums** so the same work was not repeated unnecessarily.
+That distinction mattered to me. It would have been easy to say "shared memory made it faster" and stop there. The more accurate explanation was that shared memory enabled a better reuse strategy.
 
-The optimized kernel reaches about **0.139 s**, which is a **2.5x** speedup over the baseline. Then the host-device path is improved by registering existing host buffers with `cudaHostRegister()`, allowing the GPU DMA engine to move pinned memory more efficiently. That cuts runtime further to about **0.113 s**, giving roughly **1.23x** improvement over the already optimized kernel and about **3.22x** over baseline.
+With the optimized kernel, the runtime dropped to about **0.139 s**, which was roughly **2.5x** faster than the baseline. I also analyzed control divergence instead of assuming it away. Most of the divergence was limited to the uneven work assignment during tile loading and to edge conditions near the image boundaries. The percentages were small enough that they did not dominate the final result, which helped confirm that the design direction was sound.
 
-I also liked that the report spends real time on **control divergence** instead of pretending it does not matter. It estimates where divergence happens, why it is mostly confined to edge conditions, and how `__syncthreads()` protects the shared-memory phases from overlapping incorrectly. That is exactly the kind of detail that separates “I wrote a CUDA kernel” from “I understand why this CUDA kernel behaves the way it does.”
+After that, I optimized the transfer path using **pinned host memory** with `cudaHostRegister()`. I kept the kernel launch repeated across multiple runs so I could isolate the effect better, then compared the transfer-aware version against the already optimized kernel. That brought the runtime down again to about **0.113 s**, which was another **1.23x** speedup over the kernel-only optimized version and about **3.22x** faster than the original baseline.
 
-## What Five Labs Say
+I liked this lab because it ended on a very complete point: performance work is not finished when the kernel gets fast. If the transfer path is still careless, the application is still leaving time on the table.
 
-After reading all five reports, my main takeaway is that the labs are not really five separate stories. They are one story told across different platforms.
+## What Stayed True Across All Five Labs
 
-Lab 1 says: thread-level parallelism is useful, but synchronization overhead can kill it.  
-Lab 2 says: locality and vectorization matter more than adding threads blindly.  
-Lab 3 says: on FPGA, you must build locality and reuse explicitly with buffers and pragmas.  
-Lab 4 says: kernel optimization is only half the job; the memory interface and deployment flow matter too.  
-Lab 5 says: even on CUDA, the biggest wins still come from structuring data reuse and reducing movement.
+The hardware kept changing across these labs, but the engineering logic became more consistent for me, not less.
 
-So the real subject of `labs_GEMM` is not just GEMM. It is the discipline of asking the same question on every platform:
+Across CPU, FPGA, and GPU, the same ideas kept reappearing:
 
-**Where is the data, how often am I moving it, and how much work do I get out of each movement?**
+- reduce unnecessary synchronization
+- improve locality before chasing raw parallelism
+- tile around the memory hierarchy you actually have
+- create reuse explicitly instead of hoping the hardware will infer it
+- overlap communication and computation when possible
+- measure the full system, not just the inner loop
 
-That is why the folder is worth reading as a whole. The syntax changes from OpenMP to AVX2 to HLS pragmas to CUDA. The hardware changes from CPU caches to FPGA BRAM/URAM to GPU shared memory. But the core reasoning stays surprisingly constant.
+That is what I now think of as the real value of this sequence. It was not just a set of disconnected optimizations. It trained me to look at performance problems structurally.
 
-That consistency is probably the best thing ENSC 453 seems to teach.
+When I look back at the numbers, the large speedups are satisfying. But the more important part is that I now have a much better instinct for why those speedups happened. In Lab 1, it was synchronization structure. In Lab 2, it was locality and vectorization. In Labs 3 and 4, it was explicit buffering and bandwidth-aware hardware design. In Lab 5, it was staged reuse plus better transfer behavior.
 
-**{Related Courses}**: ENSC 453 Parallel and Heterogeneous Computing, Computer Architecture, Embedded Systems, High Performance Computing
+So if I had to summarize what these taught me in one sentence, it would be this:
+
+**High performance is rarely about making arithmetic cheaper. It is about making data less expensive to move, wait on, and recompute.**
