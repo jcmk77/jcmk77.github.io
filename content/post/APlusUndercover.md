@@ -1,14 +1,14 @@
 ---
-title: "Building A+ Undercover"
+title: "Software Engineering: Building Arcade Game"
 date: 2025-04-29T10:35:00-07:00
-Description: "A retrospective on our CMPT 276 Java game project, from early design documents to pathfinding, testing, and refactoring."
+Description: "A retrospective on our Software Engineering Java game project, from early design documents to pathfinding, testing, and refactoring."
 Tags: ["Software Engineering", "Java", "Game Development", "Testing", "CMPT276"]
 Categories: ["Software Engineering"]
 DisableComments: false
 draft: false
 ---
 
-In CMPT 276, my team and I built **A+ Undercover**, a small 2D Java game with a very unserious premise and a very real software engineering story behind it. The player is a student trying to survive an exam hall: collect smartphones to get answers, avoid TAs, dodge fake answer sheets, grab bonus professor answers when they appear, and make it to the exit before time runs out.
+In Software Engineering course, my team and I built **A+ Undercover**, a small 2D Java game with a very unserious premise and a very real software engineering story behind it. The player is a student trying to survive an exam hall: collect smartphones to get answers, avoid TAs, dodge fake answer sheets, grab bonus professor answers when they appear, and make it to the exit before time runs out.
 
 What makes the project interesting to me now is not just the game itself. It is the way the repository preserves the entire arc of the project: the original design documents, the halfway uncertainty, the architectural reset, the heavy testing push, and the late-stage refactoring that made the final version feel much more disciplined than the first plan.
 
