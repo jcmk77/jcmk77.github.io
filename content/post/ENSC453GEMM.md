@@ -1,6 +1,6 @@
 ---
 title: "Hardware Acceleration: GEMM Performance Engineering"
-date: 2026-05-02T10:15:00-06:00
+date: 2026-04-02T10:15:00-06:00
 Description: "A retrospective on five ENSC 453 labs, from OpenMP GEMM on CPU to HLS on FPGA and CUDA on GPU, and how each one changed how I think about performance."
 Tags: ["ENSC453", "GEMM", "OpenMP", "AVX2", "FPGA", "HLS", "CUDA", "Performance Engineering"]
 Categories: ["Hardware Acceleration"]

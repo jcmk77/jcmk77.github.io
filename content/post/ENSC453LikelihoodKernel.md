@@ -1,6 +1,6 @@
 ---
 title: "Hardware Acceleration: Likelihood Kernel" 
-date: 2026-05-02T11:05:00-06:00
+date: 2026-04-02T11:05:00-06:00
 Description: "A retrospective on an ENSC 453 likelihood-kernel project, and how the real breakthrough came from redesigning the FPGA pipeline around data movement instead of forcing the original irregular access pattern onto the hardware."
 Tags: ["ENSC453", "FPGA", "GPU", "OpenMP", "HLS", "CUDA", "Particle Filter", "Performance Engineering"]
 Categories: ["Hardware Acceleration"]
