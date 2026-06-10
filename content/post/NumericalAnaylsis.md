@@ -2,9 +2,9 @@
 title: "Numerical Analysis"
 date: 2024-05-17T14:20:55Z
 draft: false
-description: ""
-tags: []
-categories: []
+description: "Course notes on numerical analysis, approximation, round-off error, and numerical experiments."
+tags: ["Numerical Analysis", "MATLAB", "Engineering Math", "Course Notes"]
+categories: ["Course Notes"]
 disableComments: false
 ---
 

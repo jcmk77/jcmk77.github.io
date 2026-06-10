@@ -1,0 +1,52 @@
+[[projects]]
+title = "Three-Finger Dexterous Hand with Isaac GR00T"
+description = "Robot learning project involving data collection, imitation learning, policy fine-tuning, sensor synchronization, and deployment lessons for a dexterous robotic hand."
+role = "Worked across demonstration data, embodiment setup, supervised fine-tuning, sensor synchronization, and deployment integration for an in-house three-finger dexterous hand."
+result = "The main lesson was that robot learning performance depends on the full hardware-data-deployment pipeline, not only the model."
+blog = "/post/isaacgr00tdexteroushand/"
+image = "/images/portfolio/isaac-groot-dexterous-hand.jpg"
+tags = ["Robotics", "Isaac GR00T", "VLA", "Imitation Learning", "TensorRT", "Dexterous Hand"]
+
+[[projects]]
+title = "Edge AI Model on Raspberry Pi"
+description = "Course project exploring LLM training, LoRA fine-tuning, quantization, GGUF conversion, llama.cpp deployment, and structured robot command generation on hardware-constrained devices."
+role = "Built and evaluated a training-to-deployment workflow for compact language models targeting Raspberry Pi 5 constraints."
+result = "Learned how model size, quantization format, latency, memory use, and output contract design shape practical edge AI deployment."
+blog = "/post/ensc413edgellm/"
+image = "/images/portfolio/edge-llm-raspberry-pi.jpg"
+tags = ["Edge AI", "LLM", "Raspberry Pi", "LoRA", "Quantization", "llama.cpp"]
+
+[[projects]]
+title = "Hardware Acceleration: GEMM Performance Engineering"
+description = "Performance engineering project studying data movement, synchronization, reuse, OpenMP, AVX2, CUDA, FPGA/HLS ideas, and matrix multiplication optimization."
+role = "Compared CPU, vectorization, GPU, and FPGA/HLS optimization paths through matrix multiplication labs and measurements."
+result = "The strongest takeaway was that data movement, synchronization, and reuse often dominate raw parallelism."
+blog = "/post/ensc453gemm/"
+image = "/images/portfolio/hardware-acceleration-gemm.png"
+tags = ["Hardware Acceleration", "GEMM", "OpenMP", "AVX2", "CUDA", "FPGA", "HLS"]
+
+[[projects]]
+title = "Hardware Acceleration: Likelihood Kernel"
+description = "Optimization project focused on a likelihood kernel in a particle filter pipeline, comparing acceleration strategies and understanding bottlenecks."
+role = "Analyzed and optimized the likelihood kernel across CPU, GPU, and FPGA-oriented implementations for a particle-filter workload."
+result = "Learned to redesign around memory-access structure instead of forcing an irregular algorithm onto hardware unchanged."
+blog = "/post/ensc453likelihoodkernel/"
+image = "/images/portfolio/hardware-acceleration-likelihood-kernel.png"
+tags = ["Hardware Acceleration", "Particle Filter", "GPU", "FPGA", "HLS", "Performance Engineering"]
+
+[[projects]]
+title = "Autonomous Robot System and AI Agent System"
+description = "Ongoing autonomous robot software project using LLM-based command understanding, validation, confirmation flow, LangGraph-style routing, database/API layers, and human-in-the-loop safety."
+role = "Building command understanding, routing, validation, API/database layers, and human confirmation flows for safer robot operation requests."
+result = "The current focus is making natural-language robot interaction explicit, validated, and reviewable before tool execution."
+image = "/images/portfolio/autonomous-robot-llm-system.png"
+tags = ["Robotics", "LLM Agent", "LangGraph", "FastAPI", "Streamlit", "SQLite", "Human Confirmation"]
+
+[[projects]]
+title = "A+ Undercover Java Game"
+description = "Java/Swing software engineering project using object-oriented design, team-based development, UML, testing, and version control."
+role = "Collaborated on a Java/Swing arcade game with object-oriented architecture, pathfinding, debugging, UML, testing, and Git workflow."
+result = "The project became a practical lesson in evolving a design under pressure and improving maintainability through testing and refactoring."
+blog = "/post/aplusundercover/"
+image = "/images/portfolio/aplus-undercover-java-game.png"
+tags = ["Java", "Swing", "OOP", "Software Engineering", "Testing"]

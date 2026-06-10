@@ -1,0 +1,237 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Site.Params.description }}">
+<link rel="stylesheet" href="{{ (printf "%scss/index.css" (.Site.Params.staticPath | default "")) | relURL }}" media="all">
+<link rel="stylesheet" href="{{ (printf "%scss/projects.css" (.Site.Params.staticPath | default "")) | relURL }}" media="all">
+<script defer src="{{ (printf "%sfontawesome-6/all-6.4.2.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+{{ end }}
+
+{{ define "title" }}
+{{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+{{ $projects := site.Data.projects.projects }}
+{{ $experience := site.Data.experience.experience }}
+{{ $hero := .Site.Params.hero }}
+
+<section id="portfolio-hero" class="portfolio-section">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <p class="section-kicker">{{ $hero.intro | default "Hi, I am" }}</p>
+        <h1>{{ $hero.name }}</h1>
+        <h2>{{ $hero.subtitle }}</h2>
+        <p class="hero-description">{{ $hero.description }}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="{{ "/projects/" | relURL }}">View Projects</a>
+          <a class="btn btn-outline-primary" href="{{ "/post/" | relURL }}">Read Blog</a>
+          <a class="btn btn-outline-primary" href="{{ "/resume/" | relURL }}">Resume</a>
+          <a class="btn btn-outline-primary" href="https://github.com/jcmk77" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-image-frame">
+          <img src="{{ $hero.image | default "/images/profile.jpg" }}" alt="Jason Chen profile photo">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about-preview" class="portfolio-section">
+  <div class="container">
+    <div class="section-heading">
+      <p class="section-kicker">About</p>
+      <h3>Engineering systems across AI, robotics, and hardware constraints.</h3>
+    </div>
+    <p class="section-lead">I am a Computer Engineering student at Simon Fraser University focused on AI and hardware systems. I am also supporting a professor research project related to AI on hardware and model training.</p>
+  </div>
+</section>
+
+<section id="experience" class="portfolio-section">
+  <div class="container">
+    <h3 class="experience-heading">Experience</h3>
+    <div class="experience-shell">
+      <div class="experience-tabs" role="tablist" aria-label="Experience tabs">
+        {{ range $i, $item := $experience }}
+        {{ $id := printf "experience-%s" (replace $item.company "." "" | urlize) }}
+        <button
+          class="experience-tab {{ if eq $i 0 }}active{{ end }}"
+          id="{{ $id }}-tab"
+          data-experience-target="{{ $id }}"
+          type="button"
+          role="tab"
+          aria-controls="{{ $id }}"
+          aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}">
+          {{ $item.role }}
+        </button>
+        {{ end }}
+      </div>
+      <div class="tab-content experience-content">
+        {{ range $i, $item := $experience }}
+        {{ $id := printf "experience-%s" (replace $item.company "." "" | urlize) }}
+        <article
+          class="tab-pane fade {{ if eq $i 0 }}show active{{ end }}"
+          id="{{ $id }}"
+          role="tabpanel"
+          aria-labelledby="{{ $id }}-tab"
+          tabindex="0">
+          <div class="experience-title-row">
+            <div>
+              <h4>{{ $item.role }}</h4>
+              <p class="experience-company">{{ $item.company }}</p>
+            </div>
+          </div>
+          <p class="experience-description">{{ $item.description }}</p>
+          <div class="experience-focus">
+            {{ range $item.focus }}
+            <span>{{ . }}</span>
+            {{ end }}
+          </div>
+          <div class="badge-list">
+            {{ range $item.tags }}
+            <span>{{ . }}</span>
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".experience-tab");
+    const panels = document.querySelectorAll(".experience-content .tab-pane");
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        const targetId = tab.dataset.experienceTarget;
+
+        tabs.forEach(function (item) {
+          item.classList.toggle("active", item === tab);
+          item.setAttribute("aria-selected", item === tab ? "true" : "false");
+        });
+
+        panels.forEach(function (panel) {
+          const isTarget = panel.id === targetId;
+          panel.classList.toggle("show", isTarget);
+          panel.classList.toggle("active", isTarget);
+        });
+      });
+    });
+  });
+</script>
+
+<section id="featured-projects" class="portfolio-section">
+  <div class="container">
+    <div class="section-heading with-link">
+      <div>
+        <p class="section-kicker">Featured Projects</p>
+        <h3>Project-first portfolio.</h3>
+      </div>
+      <a href="{{ "/projects/" | relURL }}">All projects</a>
+    </div>
+    <div class="row g-4">
+      {{ range $projects }}
+      <div class="col-lg-4 col-md-6">
+        {{ partial "portfolio/project-card.html" (dict "project" . "context" $ "compact" true) }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section id="latest-writing" class="portfolio-section">
+  <div class="container">
+    <div class="section-heading with-link">
+      <div>
+        <p class="section-kicker">Latest Technical Writing</p>
+        <h3>Notes from building and learning.</h3>
+      </div>
+      <a href="{{ "/post/" | relURL }}">Read blog</a>
+    </div>
+    <div class="row g-4">
+      {{ range first 3 ((where .Site.RegularPages "Section" "post").ByDate.Reverse) }}
+      <div class="col-lg-4">
+        <article class="writing-card">
+          <p class="writing-date">{{ .Date.Format "Jan 2, 2006" }}</p>
+          <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+          <p>{{ .Summary | plainify | truncate 150 }}</p>
+          {{ with .Params.categories }}
+          <div class="writing-meta">
+            {{ range first 2 . }}<span>{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+        </article>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="portfolio-section">
+  <div class="container">
+    <div class="section-heading">
+      <p class="section-kicker">Skills</p>
+      <h3>Practical toolsets for engineering systems.</h3>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>AI / Robotics</h4>
+        <ul>
+          <li>Robot Learning</li>
+          <li>Imitation Learning</li>
+          <li>VLA / VLM Application</li>
+          <li>Robot Software</li>
+          <li>Data Generation</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>AI Systems</h4>
+        <ul>
+          <li>LLM Deployment</li>
+          <li>LLM Architecture</li>
+          <li>Computer Vision</li>
+          <li>Model Training</li>
+          <li>Real Application</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Relevant Study</h4>
+        <ul>
+          <li>RISC-V CPU Architecture</li>
+          <li>Software Development</li>
+          <li>Numerical Analysis</li>
+          <li>Digital Signal Processing</li>
+          <li>Deep Learning</li>
+          <li>Project Development</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Software</h4>
+        <ul>
+          <li>Python</li>
+          <li>Java</li>
+          <li>PyTorch</li>
+          <li>C / C++</li>
+          <li>Database</li>
+          <li>Git</li>
+          <li>Docker basics</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Hardware Acceleration</h4>
+        <ul>
+          <li>OpenMP</li>
+          <li>Real-Time Systems</li>
+          <li>CUDA GEMM</li>
+          <li>FPGA / HLS</li>
+          <li>VHDL</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,9 +1,9 @@
 ---
 title: "Mircoelectronics"
 date: 2023-12-01T23:42:29-08:00
-Description: ""
-Tags: []
-Categories: []
+Description: "Course notes and PDF references on microelectronics topics including diode, BJT, and MOSFET analysis."
+Tags: ["Microelectronics", "Diode", "BJT", "MOSFET", "Course Notes"]
+Categories: ["Course Notes"]
 DisableComments: false
 draft: false
 ---

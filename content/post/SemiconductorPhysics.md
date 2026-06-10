@@ -1,9 +1,9 @@
 ---
 title: "Semiconductor Physics"
 date: 2024-12-01T23:42:29-08:00
-Description: ""
-Tags: []
-Categories: []
+Description: "Course notes and PDF references on semiconductor physics, including microscopic semiconductor behavior, pn junctions, BJT, and MOSFET principles."
+Tags: ["Semiconductor Physics", "BJT", "MOSFET", "Electronics", "Course Notes"]
+Categories: ["Course Notes"]
 DisableComments: false
 draft: false
 ---

@@ -2,8 +2,8 @@
 title: "AI Language Model from Scratch"
 date: 2026-05-01T20:05:00-06:00
 Description: "A retrospective on an ENSC 413 edge-LLM project that trained a compact model from scratch, fine-tuned Gemma and Qwen with LoRA, and benchmarked everything on a Raspberry Pi 5."
-Tags: ["ENSC413", "LLM", "Raspberry Pi", "LoRA", "Quantization", "Edge AI", "Transformers"]
-Categories: ["Artificial Intelligence"]
+Tags: ["ENSC413", "LLM", "Raspberry Pi", "LoRA", "Quantization", "llama.cpp", "Edge AI", "Transformers"]
+Categories: ["Edge AI"]
 DisableComments: false
 draft: false
 ---

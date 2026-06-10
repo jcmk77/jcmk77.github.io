@@ -1,9 +1,9 @@
 ---
 title: "My First Post"
 date: 2022-01-01T23:42:29-08:00
-Description: ""
-Tags: []
-Categories: []
+Description: "Introductory post for the site and the engineering topics I planned to document."
+Tags: ["Reflections", "Engineering", "Course Notes"]
+Categories: ["Reflections"]
 DisableComments: false
 draft: false
 ---

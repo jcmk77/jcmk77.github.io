@@ -1,0 +1,25 @@
+[[experience]]
+role = "Intern, Embodied AI"
+company = "CasiaHand Robotics"
+location = "Beijing, China"
+date = "May-Dec 2025"
+description = "I worked on the engineering side of embodied AI, connecting robot learning models with real dexterous-hand hardware. The role involved data collection, Isaac GR00T fine-tuning and deployment, sensing and synchronization issues, and practical evaluation of what made the hand behave better in real experiments."
+focus = [
+  "Dexterous-hand robot learning",
+  "Isaac GR00T deployment",
+  "3D data and segmentation workflows"
+]
+tags = ["Embodied AI", "Deep Learning", "Dexterous Hand", "Isaac GR00T", "Python", "3D Segmentation", "LLM"]
+
+[[experience]]
+role = "ML Engineer Intern"
+company = "Dr.Peng Group"
+location = "Beijing, China"
+date = "Apr-Aug 2023"
+description = "I worked on applied machine learning pipeline development, from preprocessing and model evaluation to cloud-side data processing and database-backed result tracking. The experience helped me understand how ML work fits into a larger engineering workflow where experiments need to be repeatable, testable, and useful to other teams."
+focus = [
+  "ML pipeline development",
+  "Cloud-side data processing",
+  "Model evaluation and iteration"
+]
+tags = ["Machine Learning", "Python", "Data Pipelines", "Cloud Integration", "Databases", "Model Evaluation"]

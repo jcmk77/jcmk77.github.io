@@ -1,0 +1,38 @@
+{{ $project := .project }}
+{{ $compact := .compact }}
+<article class="portfolio-card">
+  <div class="portfolio-card-image">
+    <img src="{{ $project.image }}" alt="{{ $project.title }}">
+  </div>
+  <div class="portfolio-card-body">
+    <h4>{{ $project.title }}</h4>
+    <p>{{ $project.description }}</p>
+    <div class="badge-list">
+      {{ range $project.tags }}
+      <span>{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ if not $compact }}
+    <dl class="project-details">
+      <div>
+        <dt>Role</dt>
+        <dd>{{ $project.role }}</dd>
+      </div>
+      <div>
+        <dt>Result / Lesson</dt>
+        <dd>{{ $project.result }}</dd>
+      </div>
+    </dl>
+    {{ end }}
+  </div>
+  {{ if or $project.blog $project.github }}
+  <div class="portfolio-card-footer">
+    {{ with $project.blog }}
+    <a href="{{ . | relURL }}">Read write-up</a>
+    {{ end }}
+    {{ with $project.github }}
+    <a href="{{ . }}" target="_blank" rel="noopener">GitHub</a>
+    {{ end }}
+  </div>
+  {{ end }}
+</article>

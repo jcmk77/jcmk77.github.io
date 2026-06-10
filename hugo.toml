@@ -1,191 +1,210 @@
 baseURL = "https://jcmk77.github.io/"
 languageCode = "en-us"
-title = "Muk's Blog"
-theme = "anatole"
-summaryLength = 10
+title = "Jason Chen | AI Robotics & Computer Engineering"
+theme = "hugo-profile"
+summaryLength = 24
 enableEmoji = true
 enableRobotsTXT = true
 
-# Syntax Highlighting
-pygmentsUseClasses = true
-pygmentsCodeFences = true
-pygmentsCodefencesGuessSyntax = true
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  page = ["HTML", "RSS"]
 
-# Localized dates requires Hugo >= 0.87.0
-localizedDates = false
+[pagination]
+  pagerSize = 6
 
 [caches]
   [caches.images]
     dir = ":cacheDir/images"
 
-################################################################################
-# Markup Config
-################################################################################
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.highlight]
+    noClasses = false
 
-################################################################################
-# Taxonomies (Categories, Tags, etc.)
-################################################################################
 [taxonomies]
   category = "categories"
-  series   = "series"
-  tag      = "tags"
+  series = "series"
+  tag = "tags"
 
-################################################################################
-# Related Content
-################################################################################
 [related]
   includeNewer = true
-  threshold    = 80
-  toLower      = true
+  threshold = 80
+  toLower = true
 
 [[related.indices]]
-  name   = "keywords"
+  name = "keywords"
   weight = 100
 
 [[related.indices]]
-  name   = "tags"
+  name = "tags"
   weight = 80
 
-################################################################################
-# Services (Disqus, Google Analytics, etc.)
-################################################################################
-[services.disqus]
-  #shortname = "your-disqus-shortname"
+[[menu.main]]
+  identifier = "home"
+  name = "Home"
+  title = "Home"
+  url = "/"
+  weight = 10
 
-[services.googleAnalytics]
-  #ID = "G-MEASUREMENT_ID"
+[[menu.main]]
+  identifier = "projects"
+  name = "Projects"
+  title = "Projects"
+  url = "/projects/"
+  weight = 20
 
-################################################################################
-# Menus (Merged from menus.en.toml)
-################################################################################
-[menu]
+[[menu.main]]
+  identifier = "blog"
+  name = "Blog"
+  title = "Technical Blog"
+  url = "/post/"
+  weight = 30
 
-  [[menu.main]]
-    name       = "Home"
-    identifier = "home"
-    weight     = 100
-    url        = "/"
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  title = "About"
+  url = "/about/"
+  weight = 40
 
-  [[menu.main]]
-    name       = "Posts"
-    identifier = "posts"
-    weight     = 200
-    url        = "/post/"
+[[menu.main]]
+  identifier = "resume"
+  name = "Resume"
+  title = "Resume"
+  url = "/resume/"
+  weight = 50
 
-# [[menu.main]]
-#   name       = "Portfolio"
-#   identifier = "portfolio"
-#   weight     = 300
-#   url        = "/portfolio/"
+[[menu.main]]
+  identifier = "contact"
+  name = "Contact"
+  title = "Contact"
+  url = "/contact/"
+  weight = 60
 
-  [[menu.main]]
-    name       = "About"
-    identifier = "about"
-    weight     = 400
-    url        = "/about/"
-
-# [[menu.main]]
-#   name       = "Accomplishments"
-#   identifier = "accomplishments"
-#   weight     = 500
-
-#  [[menu.main]]
-#    name       = "Awards"
-#    identifier = "awards"
-#    weight     = 510
-#    url        = "/awards/"
-#    parent     = "accomplishments"
-
-#  [[menu.main]]
-#    name       = "Certifications"
-#    identifier = "certifications"
-#    weight     = 520
-#    url        = "/certifications/"
-#    parent     = "accomplishments"
-
-  [[menu.main]]
-    name       = "Contact"
-    identifier = "contact"
-    weight     = 600
-    url        = "/contact/"
-
-################################################################################
-# Theme-Specific Parameters (Merged from params.toml)
-################################################################################
 [params]
-  # The Anatole theme often reads these to populate the left sidebar
-  title            = "I'm Jason(Mukun)"
-  author           = "Mukun"
-  description      = "Here is Jason's engineering stuff and thoughts at SFU. Let's shape our world by TECHNOLOGIES. Click Posts to learn more" 
-  profilePicture   = "images/profile.jpg"
-  keywords         = ""
-  favicon          = "favicons/"
-  customCss        = []
-  customJs         = []
-  mainSections     = ["post"]
-  images           = ["images/site-feature-image.png"]
-  doNotLoadAnimations = false
+  title = "Jason Chen"
+  description = "Portfolio and technical blog of Jason Chen, a Computer Engineering student at Simon Fraser University focused on AI robotics, embedded systems, edge AI, and hardware acceleration."
+  hostName = "https://jcmk77.github.io"
+  favicon = "/favicons/favicon.ico"
+  images = ["/images/site-feature-image.png"]
+  useBootstrapCDN = false
+  mathjax = false
+  animate = true
+  customCSS = true
+  mainSections = ["post"]
 
-  [params.rssAuthor]
-    name = "Mukun"
-    email = "mca307@sfu.ca"
+  [params.theme]
+    defaultTheme = "light"
 
-  # Control how dates are displayed in lists or single posts
-  singleDateFormat = "2/1/2006"
-  indexDateFormat  = "2/1/2006"
-  listDateFormat   = "2/1/2006"
+  [params.font]
+    fontSize = "1rem"
+    fontWeight = 400
+    lineHeight = 1.6
+    textAlign = "left"
 
-  # Reverse the page title format (Title | Author vs. Author | Title)
-  reversepagetitle = true
+  [params.color]
+    textColor = "#24292f"
+    secondaryTextColor = "#57606a"
+    textLinkColor = "#0969da"
+    backgroundColor = "#f6f8fa"
+    secondaryBackgroundColor = "#ffffff"
+    primaryColor = "#0969da"
+    secondaryColor = "#ffffff"
 
-  # If you want to hide the sidebar entirely, uncomment:
-  #hidesidebar = true
+    [params.color.darkmode]
+      textColor = "#f0f3f6"
+      secondaryTextColor = "#b7c0cc"
+      textLinkColor = "#8cc2ff"
+      backgroundColor = "#0d1117"
+      secondaryBackgroundColor = "#161b22"
+      primaryColor = "#8cc2ff"
+      secondaryColor = "#161b22"
 
-  # Example contact form integration
-  #contactFormAction   = "https://formspree.io/f/your-form-hash-here"
-  #contactFormReCaptcha = "your-site-key-here"
+  [params.navbar]
+    align = "ms-auto"
+    brandName = "Jason Chen"
+    showBrandLogo = false
+    disableSearch = true
+    enableSeparator = false
 
-  # Example Google Fonts array
-  #googleFonts = ["Indie+Flower", "Roboto:ital,wght@0,100;0,400;0,700;1,400"]
+    [params.navbar.stickyNavBar]
+      enable = true
+      showOnScrollUp = true
 
-  # More advanced settings
-  #readMore          = true
-  #postSectionName   = "blog"
-  #relatedPosts      = true
-  #numberOfRelatedPosts = 3
-  #disableTitleCapitalization = true
+    [params.navbar.menus]
+      disableAbout = true
+      disableExperience = true
+      disableEducation = true
+      disableProjects = true
+      disableAchievements = true
+      disableContact = true
 
-  ##############################################################################
-  # Analytics Integrations
-  ##############################################################################
-  [params.simpleAnalytics]
-    # enable = true
-    # customurl = "https://analytics.example.com"
+  [params.hero]
+    enable = true
+    intro = "Hi, I am"
+    name = "Jason (Mukun) Chen"
+    subtitle = "Computer Engineering Student @ Simon Fraser University"
+    description = "I build projects across Embodied AI, LLM, AI agent systems, and computing acceleration."
+    image = "/images/profile.jpg"
 
-  [params.plausibleAnalytics]
-    # domain   = "example.com"
-    # serverURL = "https://analytics.example.com"
-
-  [params.umami]
-    # serverURL = "example.com"
-    # id = "94db1cb1-74f4-4a40-ad6c-962362670409"
-    # trackerScriptName = "mycustomscriptname.js"
-
-  ##############################################################################
-  # Math Support (KaTeX / MathJax)
-  ##############################################################################
-  [params.math]
+  [params.about]
     enable = false
-    use    = "katex"
 
-  ##############################################################################
-  # Social Icons
-  ##############################################################################
-  [[params.socialIcons]]
-    icon  = "fa-brands fa-linkedin"
-    title = "Linkedin"
-    url   = "https://www.linkedin.com/in/mk-chen-b79735347"
+  [params.experience]
+    enable = false
+
+  [params.education]
+    enable = false
+
+  [params.projects]
+    enable = false
+
+  [params.achievements]
+    enable = false
+
+  [params.contact]
+    enable = false
+
+  [params.footer]
+    [params.footer.recentPosts]
+      path = "post"
+      count = 3
+      title = "Recent Technical Writing"
+      enable = true
+      disableFeaturedImage = true
+
+    [params.footer.socialNetworks]
+      github = "https://github.com/jcmk77"
+      linkedin = "https://www.linkedin.com/in/jcmk26"
+
+  [params.listPages]
+    disableFeaturedImage = true
+
+  [params.singlePages]
+    socialShare = false
+
+    [params.singlePages.readTime]
+      enable = true
+      content = "min read"
+
+    [params.singlePages.scrollprogress]
+      enable = true
+
+    [params.singlePages.tags]
+      openInNewTab = false
+
+  [params.terms]
+    read = "Read"
+    toc = "Table of Contents"
+    tags = "Tags"
+    social = "Share"
+    copyright = "All rights reserved"
+    emailText = "Read this post:"
+
+  [params.datesFormat]
+    article = "Jan 2, 2006"
+    articleList = "Jan 2, 2006"
+    articleRecent = "Jan 2, 2006"

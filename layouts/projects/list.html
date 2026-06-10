@@ -1,0 +1,28 @@
+{{ define "head" }}
+<meta name="description" content="{{ .Params.description | default .Site.Params.description }}">
+<link rel="stylesheet" href="{{ (printf "%scss/projects.css" (.Site.Params.staticPath | default "")) | relURL }}" media="all">
+<script defer src="{{ (printf "%sfontawesome-6/all-6.4.2.js" (.Site.Params.staticPath | default "")) | relURL }}"></script>
+{{ end }}
+
+{{ define "title" }}
+{{ .Title }} | {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<main id="projects-page" class="portfolio-section">
+  <div class="container">
+    <div class="section-heading text-center">
+      <p class="section-kicker">Projects</p>
+      <h1>{{ .Title }}</h1>
+      <p class="section-lead mx-auto">{{ .Params.description }}</p>
+    </div>
+    <div class="row g-4">
+      {{ range site.Data.projects.projects }}
+      <div class="col-lg-6">
+        {{ partial "portfolio/project-card.html" (dict "project" . "context" $ "compact" false) }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</main>
+{{ end }}

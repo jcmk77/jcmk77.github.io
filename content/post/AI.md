@@ -1,9 +1,9 @@
 ---
 title: "Artificial Intelligence"
 date: 2024-04-01T23:42:29-08:00
-Description: ""
-Tags: []
-Categories: []
+Description: "Course notes and reflections from studying artificial intelligence topics including search, reinforcement learning, Bayesian networks, regression, neural networks, and optimization."
+Tags: ["Artificial Intelligence", "Machine Learning", "Reinforcement Learning", "Neural Networks", "Course Notes"]
+Categories: ["Course Notes"]
 DisableComments: false
 draft: false
 ---
@@ -117,4 +117,3 @@ We then introduce additional features (e.g., counting loops or connected regions
 Evaluate each classifier on both a validation and test set to measure accuracy.
 Compare results to see how tuning parameters (e.g., iterations for Perceptron, C for MIRA, smoothing k for Naïve Bayes) and enhanced features impact performance.
 <br>
-

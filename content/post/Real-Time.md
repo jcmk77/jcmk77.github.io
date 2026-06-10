@@ -1,9 +1,9 @@
 ---
 title: "multithread & Real-Time System"
 date: 2024-01-01T23:42:29-08:00
-Description: ""
-Tags: []
-Categories: []
+Description: "Notes from embedded and real-time systems work involving YMODEM, multithreading, synchronization, serial communication, and STM32 follow-up learning."
+Tags: ["Real-Time Systems", "Embedded Systems", "Multithreading", "Serial Communication", "STM32", "Course Notes"]
+Categories: ["Embedded Systems"]
 DisableComments: false
 draft: false
 ---
