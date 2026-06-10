@@ -148,7 +148,7 @@ enableRobotsTXT = true
     name = "Jason (Mukun) Chen"
     subtitle = "Computer Engineering Student @ Simon Fraser University"
     description = "I build projects across Embodied AI, LLM, AI agent systems, and computing acceleration."
-    image = "/images/profile.jpg"
+    image = "/images/profile-cat.jpg"
 
   [params.about]
     enable = false
