@@ -1,5 +1,5 @@
 [[projects]]
-title = "Three-Finger Dexterous Hand with Isaac GR00T"
+title = "Embodied AI: Three-Finger Dexterous Hand with Isaac GR00T"
 description = "Robot learning project involving data collection, imitation learning, policy fine-tuning, sensor synchronization, and deployment lessons for a dexterous robotic hand."
 role = "Worked across demonstration data, embodiment setup, supervised fine-tuning, sensor synchronization, and deployment integration for an in-house three-finger dexterous hand."
 result = "The main lesson was that robot learning performance depends on the full hardware-data-deployment pipeline, not only the model."
@@ -36,11 +36,12 @@ tags = ["Hardware Acceleration", "Particle Filter", "GPU", "FPGA", "HLS", "Perfo
 
 [[projects]]
 title = "Autonomous Robot System and AI Agent System"
-description = "Ongoing autonomous robot software project using LLM-based command understanding, validation, confirmation flow, LangGraph-style routing, database/API layers, and human-in-the-loop safety."
-role = "Building command understanding, routing, validation, API/database layers, and human confirmation flows for safer robot operation requests."
-result = "The current focus is making natural-language robot interaction explicit, validated, and reviewable before tool execution."
+description = "In-progress local MVP for simulated robot operations using FastAPI, LangGraph, RAG, ChromaDB, SQLite, Streamlit, and mock robot tools."
+role = "Building the assistant workflow across intent understanding, validation, LangGraph routing, RAG, backend APIs, SQLite state, and mock robot operation tools."
+result = "The main design lesson is that LLMs can help with language and explanation, while deterministic validation and backend tools should control robot actions."
+blog = "/projects/autonomous-robot-system-ai-agent-system/"
 image = "/images/portfolio/autonomous-robot-llm-system.png"
-tags = ["Robotics", "LLM Agent", "LangGraph", "FastAPI", "Streamlit", "SQLite", "Human Confirmation"]
+tags = ["Robotics", "AI Agent", "LangGraph", "RAG", "FastAPI", "Streamlit", "SQLite", "ChromaDB"]
 
 [[projects]]
 title = "A+ Undercover Java Game"
