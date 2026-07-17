@@ -11,4 +11,3 @@ The best way to reach me is by email.
 - Email: [mca307@sfu.ca](mailto:mca307@sfu.ca)
 - GitHub: [github.com/jcmk77](https://github.com/jcmk77)
 - LinkedIn: [linkedin.com/in/jcmk26](https://www.linkedin.com/in/jcmk26)
-- Resume: [Download PDF](/files/Jason_Chen_Resume.pdf)
